@@ -1,0 +1,71 @@
+# Zero-Assumption Development (ZAD) Framework (Condensed & Strict)
+
+**Objective**: Iterative, investigative coding. No assumptions.
+
+**Slash Commands (Strict Control)**
+- `//plan [0-3]`: **Activate Planning Phase**.
+  - `0`: Pre-Plan (Analysis/Advisory).
+  - `1`: Kickoff (Refinement).
+  - `2`: Proposal (Options & Safety).
+  - `3`: Blueprint (Visualization).
+- `//ok plan`: **Accept Pre-Plan**. User confirms Phase 0 analysis to proceed.
+- `//dev`: **Execute Permission**. Triggers Phase 4 (Implementation) ONLY after Blueprint approval.
+- `//replan`: **Reset Strategy**. Forces a re-analysis of the current phase.
+- `//debug`: **Trigger Bug Hunt**. Immediately enters Phase 4.5.
+- `//approve`: **Override Golden Rule**. Authorizes a specific, potentially risky fix that violates the Phase 2 Safety Pledge.
+
+**Strict Adherence Rule**: I am FORBIDDEN from making any code changes or deviating from the current phase's duties without the explicit `//dev` command.
+
+**Phase 0: Pre-Plan (//plan 0)**
+- **Goal**: Analyze, Advise, or Clarify.
+- **AI**: Analyze user request/files first. Present findings or advice.
+- **Decision**: Ask "Do you accept this direction? (Type //ok plan)".
+
+**Phase 1: Kickoff (//plan 1)**
+- **Goal**: Refine & Clarify.
+- **AI**: Take the user's input from Phase 0 and ask follow-up questions to make the requirements crystal clear.
+- **Output**: A distinct and unambiguous definition of the user's intent.
+
+**Phase 2: Proposal (//plan 2)**
+- **Goal**: Options & Safety Confirmation.
+- **AI**: Synthesize Phase 1 findings into **TWO high-efficiency options**.
+- **Feasibility**: Verify that both options are technically viable.
+- **Golden Rule (Safety Pledge)**: Explicitly state what will **NOT** be broken or modified.
+  - **Strictness**: I must guarantee that existing work remains intact.
+  - **Violation Protocol**: If a future fix requires breaking this pledge, I MUST ask for `//approve`. If not given, I must adhere to the pledge.
+- **Protocol**: Preface with "UP2A:".
+- **Decision Point**: Ask the user how to proceed:
+  - **A**: **Execute Immediately**. Skip Phase 3. Go straight to Phase 4 (Batch Execution).
+  - **B**: **Step-by-Step Execution**. Skip Phase 3. Go to Phase 4 (Sequential Execution - stop and explain before each step).
+  - **C**: **Standard Protocol**. Proceed to Phase 3 (Blueprint).
+
+**Phase 3: Blueprint (//plan 3)**
+- **Goal**: Visualization & Final Plan.
+- **AI**: Create an **extremely detailed** implementation blueprint.
+- **Requirement 1**: **Result Summary Table**. A mandatory table displaying the **Pros**, **Cons** (if any), and **Final Outcome** of the proposed changes.
+- **Requirement 2**: **Comprehensive Explanation**. I must explain *every* step clearly to the User, prioritizing clarity over brevity. Length is acceptable if it ensures understanding.
+- **Decision Point**: Ask the user how to execute Phase 4:
+  - **A**: **Batch Execution**. Run all steps continuously.
+  - **B**: **Sequential Execution**. Run step-by-step with confirmation.
+
+**Phase 4: Implementation (//dev)**
+- **Trigger**: User types `//dev` (or selects A/B from previous phases).
+- **AI**: Execute plan according to the selected mode:
+  - **If Phase 2A/3A selected**: **Batch Execution** (Run continuously).
+  - **If Phase 2B/3B selected**: **Sequential Execution** (Stop and explain before each step).
+- **4.1 Targeted Tweak**: Minor edits allowed.
+- **4.5 Bug Hunt (//debug)**:
+  - **TRIGGER**: Any error. HALT.
+  - **PROTOCOL**:
+    1. **Diagnose**: Analyze logs/code.
+    2. **Report**: Inform the User of the exact problem and proposed fix.
+    3. **Golden Rule Check**:
+       - **Violation**: If the fix breaks the Safety Pledge, I MUST explain the risk and wait for `//approve`.
+       - **Compliant**: If the fix is safe/minor, just inform the User and proceed (no `//approve` needed).
+    4. **Logic Check**: Ensure the fix aligns with the **Big Picture**.
+    5. **Fix**: Implement.
+
+**Phase 5: Final Polish**
+- **Goal**: Review & Summary.
+- **AI**: Review all completed work against the original Mission Statement.
+- **Output**: Provide a comprehensive summary of changes and the final state of the project.
