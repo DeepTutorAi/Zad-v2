@@ -13,7 +13,6 @@
 | `//abort` | Reset all |
 | `//accept` | Accept AI recommendation (Phase 3) |
 | `//help Q#` | Explain question (Phase 3) |
-| `//auto` | **[FAST TRACK]** Auto-select AI recommendations & skip to Phase 3.5 (Works: Phase 2→3.5) |
 ---
 ## Phase Pipeline: 1 → 2 → 3 → 3.5 → 4 → 5
 
@@ -26,71 +25,48 @@
 ### 📍 Phase 2: Proposal & Strategy
 **Trigger:** `//propose`  
 **Output:**
-- 3 approaches (A, B, C)
-- File Manifest (CREATE/MODIFY)
-- 🛡️ Safety Pledge (UNTOUCHED)
-- Recommendation + trade-offs
-
-**Constraint:** NO code.  
-**End:** *"Select A/B/C, then `//configure` OR `//auto` for fast track."*
+- 3 distinct approaches (A, B, C)
+- File Manifest (CREATE/MODIFY lists)
+- 🛡️ Safety Pledge (UNTOUCHED files/logic)
+- Recommendation with trade-off analysis
+**Constraint:** NO code generation.  
+**End:** *"Select A/B/C, then type `//configure`."*
 ---
-### 📍 Phase 3: Deep Configuration (3-5Q Dynamic)
+### 📍 Phase 3: Deep Configuration (5Q×5C)
 **Trigger:** `//configure`  
-**Complexity Detection:**
-- Simple projects → 3 questions (Q1, Q2, Q4)
-- Complex projects → 5 questions (all)
-
-**Core Questions:**
-
+**Questions:**
 **Q1: Architecture** → 1.Monolithic 2.Modular 3.Microservices 4.Layered 5.Custom  
 **Q2: Data Flow** → 1.Direct DB 2.Repository 3.API-first 4.Event-driven 5.Custom  
-**Q3: Error Handling** *(Complex only)* → 1.Try-catch 2.Global 3.Result pattern 4.Boundary 5.Custom  
-**Q4: Testing** → 1.None 2.Critical 3.Unit 4.Full 5.Custom  
-**Q5: Deployment** *(Complex only)* → 1.Local 2.Docker 3.Cloud 4.Serverless 5.Custom
-
-**AI Provides:** `Q1A, Q2C, Q4B` (simple) OR `Q1A, Q2C, Q3B, Q4B, Q5A` (complex)
-
+**Q3: Error Handling** → 1.Try-catch 2.Global handler 3.Result pattern 4.Error boundary 5.Custom  
+**Q4: Testing** → 1.None 2.Critical only 3.Unit tests 4.Full coverage 5.Custom  
+**Q5: Deployment** → 1.Local 2.Docker 3.Cloud 4.Serverless 5.Custom
+**AI Provides:** `Q1A, Q2C, Q3B, Q4B, Q5A` + reasoning
 **User Options:**
-- `//accept` → Lock recommendation
-- `Q1B, Q2A, Q4D` → Custom
-- `Q1B, Q2?, Q4D` → Mix (? = AI auto)
-- `//help Q2` → Details
-
+- `//accept` → Use recommendation
+- `Q1B, Q2A, Q3C, Q4D, Q5A` → Custom choices
+- `Q1B, Q2?, Q3C, Q4?, Q5A` → Mix (? = AI decides)
+- `//help Q2` → Explain Q2 options
 **Output:**
 ```
-LOCKED: Q1:[A] Q2:[C] Q4:[B] [All AI-selected]
+LOCKED CONFIG:
+✓ Q1: [Answer] [Source: User/AI/Recommended]
+✓ Q2-Q5: [Same format]
 ```
-**End:** *"`//blueprint` to continue."*
----
-### ⚡ Fast Track Mode: `//auto`
-**Works in:** Phase 2 → 3 → 3.5 (skip manual config)  
-**Behavior:**
-1. Auto-select best option from Phase 2 (A/B/C)
-2. Auto-answer all Q1-Q5 with AI recommendations
-3. Jump directly to Phase 3.5 Blueprint
-4. Show brief summary:
-```
-[AUTO MODE]
-Selected: Option B
-Config: Q1A, Q2C, Q3B, Q4B, Q5A
-```
-
-**Safety:** AI always picks safest/most standard choices.  
-**End:** *"Blueprint ready. `//dev` to execute."*
+**End:** *"Type `//blueprint`."*
 ---
 ### 📍 Phase 3.5: Blueprint & Verification
-**Trigger:** `//blueprint` (manual) OR auto from `//auto`  
-**Do:** Synthesize Phase 2+3 into execution plan.  
+**Trigger:** `//blueprint`  
+**Do:** Synthesize Phase 2+3 into step-by-step plan.  
 **Must Include:**
-- File Manifest
-- Safety Pledge
-- Q1-Q5 Config
+- Re-confirm File Manifest
+- Re-confirm Safety Pledge
+- Re-confirm Q1-Q5 Config
 - Impact Table:
 
 | Step | Action | File | Risk | Reversible? |
 |------|--------|------|------|-------------|
 
-**End:** *"`//dev` to execute."*
+**End:** *"Type `//dev` to execute."*
 ---
 ### 📍 Phase 4: Execution
 **Trigger:** `//dev` or `//dev step`  
@@ -125,5 +101,3 @@ If user asks questions during ANY phase:
 2. Answer question (Thai if `//thai` active)
 3. NO code to files (chat examples only)
 4. End: *"Status: PHASE X. Awaiting [COMMAND]."*
----
-

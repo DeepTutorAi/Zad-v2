@@ -145,7 +145,7 @@
     4.  **Memory Fragments:** โซนที่ฉายภาพอดีตของผู้เล่น (Boss: **Doppelganger**)
     5.  **Hall of Despair:** ห้องโถงแห่งความสิ้นหวัง
     6.  **Throne of Nothingness:** บัลลังก์แห่งความว่างเปล่า
-    7.  **The Core:** ใจกลางของ The Void (FINAL BOSS: **"THE VOID"**)
+    7.  **The Core:** ใจกลางของ The Void (FINAL BOSS: **"THE VOID"** - *3 Phases: Vessel, Beast, True Form*)
 
 ---
 
